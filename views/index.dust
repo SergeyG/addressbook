@@ -1,0 +1,135 @@
+{>layout /}
+{<stylesheetContainer}
+<link href="/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+<link href="/plugins/jquery-notifications/css/messenger.css" rel="stylesheet" type="text/css" />
+<link href="/plugins/jquery-notifications/css/messenger-theme-flat.css" rel="stylesheet" type="text/css" />
+<!-- BELOW CSS FILE IS NOT REQUIRED -->
+<link href="./plugins/jquery-notifications/css/location-sel.css" rel="stylesheet" type="text/css" />
+{/stylesheetContainer}
+{<styleContainer}
+{/styleContainer}
+{<content}
+<!-- BEGIN PAGE CONTAINER-->
+<div class="page-content">
+    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="grid simple" id="new-address-wrapper">
+                    <div class="grid-title no-border">
+                        <h4 class="semi-bold">Address Book Bulk Load</h4>
+                    </div>
+                    <div class="grid-body">
+                        <form id="new-address-form" name="formUpload" action="/post-file" method="POST" enctype="multipart/form-data" class="form-no-horizontal-spacing" novalidate="novalidate">
+                            <div class="row column-seperation">
+                                <div class="col-md-6">
+                                    <div class="row form-row">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <span class="btn btn-default btn-file">
+                                                <span class="fileinput-new">Select file</span>
+                                                <span class="fileinput-exists">Change</span>
+                                                <input id="csvFileInput" name="csvFileInput" type="file" name="..." accept=".csv" />
+                                            </span>
+                                            <span class="fileinput-filename"></span>
+                                            <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                        </div>
+                                    </div>
+                                    <div class="row small-text">
+                                        <h4 class="col-md-12">
+                                            NOTE - you can choose only CSV file. The first row is the header.
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="pull-left">
+                                    <button class="btn btn-primary btn-cons" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="addresslist">
+            <div class="row">
+                {#addressList}
+                <div class="col-md-4">
+                    <div class="grid simple no-border" data-id="{_id}">
+                        <div class="grid-title no-border descriptive clickable">
+                            <h4 class="semi-bold"><span class="name">{.firstname} {.lastname}</span> - <span class="email"><a href="mailto:{.email}">{.email}</a></span></h4>
+                            <p><span class="text-success bold due">Created on {.created_at}</span></p>
+                            <div class="actions">
+                                <a class="edit" href="javascript:;" title="Edit address"><i class="fa fa-edit"></i></a>
+                                <a class="remove" href="javascript:;" title="Delete address"><i class="fa fa-times"></i></a>
+                            </div>
+                        </div>
+                        <div class="grid-body grid-actions no-border" style="display:none">
+                            <form class="edit-address-form" data-id="{_id}">
+                                <div class="post col-md-12">
+                                    <div class="row form-row">
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="First Name" class="form-control firstname" name="txtFirstName" value="{.firstname}" />
+                                        </div>
+                                    </div>
+                                    <div class="row form-row">
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="Last Name" class="form-control lastname" name="txtLastName" value="{.lastname}" />
+                                        </div>
+                                    </div>
+                                    <div class="row form-row">
+                                        <div class="col-md-12">
+                                            <input type="email" placeholder="Email" class="form-control email" name="txtEmail" value="{.email}" />
+                                        </div>
+                                    </div>
+                                    <div class="row form-row">
+                                        <div class="col-md-12 margin-top-10">
+                                            <div class="pull-left">
+                                                <button class="btn btn-primary btn-cons" type="submit">Submit</button>
+                                                <button class="btn btn-cons btn-close-editor" type="button">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {:else}
+                <h5 class="semi-bold">You do not have any addresses</h5>
+                {/addressList}
+            </div>
+            <div class="block">
+                <ul class="pagination clearfix">
+                    {#addressPagination}
+                        <li {@eq key="{currentpage}" value="{.page}"}class="active disabled"{/eq}>
+                            <a href="/page/{.page}" data-page="{.page}">{.page}</a>
+                        </li>
+                    {/addressPagination}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{/content}
+{<pluginContainer}
+<!-- BEGIN JS DEPENDECENCIES-->
+<script src="/plugins/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="/plugins/bootstrapv3/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/plugins/jquery-block-ui/jqueryblockui.min.js" type="text/javascript"></script>
+<script src="/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+<script src="/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+<script src="/plugins/jquery-scrollbar/jquery.scrollbar.min.js" type="text/javascript"></script>
+<script src="/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
+<script src="/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/plugins/bootstrap-select2/select2.min.js" type="text/javascript"></script>
+<!-- END CORE JS DEPENDECENCIES-->
+<!-- BEGIN CORE TEMPLATE JS -->
+<script src="/js/themes.js" type="text/javascript"></script>
+<!-- BEGIN PAGE LEVEL JS -->
+<script src="/plugins/jquery-notifications/js/messenger.min.js" type="text/javascript"></script>
+<script src="/plugins/jquery-notifications/js/messenger-theme-future.js" type="text/javascript"></script>
+<script src="/js/book_manager.js" type="text/javascript"></script>
+{/pluginContainer}
+{<scriptContainer}
+{/scriptContainer}

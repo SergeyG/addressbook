@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="grid simple no-border" data-id="{._id}">
+            <div class="grid-title no-border descriptive clickable">
+                <h4 class="semi-bold"><span class="name">{.firstname} {.lastname}</span> - <span class="email"><a href="mailto:{.email}">{.email}</a></span></h4>
+                <p><span class="text-success bold due">Created on {.created_at}</span></p>
+                <div class="actions">
+                    <a class="edit" href="javascript:;" title="Edit address"><i class="fa fa-edit"></i></a>
+                    <a class="remove" href="javascript:;" title="Delete address"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="grid-body grid-actions no-border" style="display:none">
+                <form class="edit-address-form" data-id="{._id}">
+                    <div class="post col-md-12">
+                        <div class="row form-row">
+                            <div class="col-md-12">
+                                <input type="text" placeholder="First Name" class="form-control firstname" name="txtFirstName" value="{.firstname}" />
+                            </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col-md-12">
+                                <input type="text" placeholder="Last Name" class="form-control lastname" name="txtLastName" value="{.lastname}" />
+                            </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col-md-12">
+                                <input type="email" placeholder="Email" class="form-control email" name="txtEmail" value="{.email}" />
+                            </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col-md-12 margin-top-10">
+                                <div class="pull-left">
+                                    <button class="btn btn-primary btn-cons" type="submit">Submit</button>
+                                    <button class="btn btn-cons btn-close-editor" type="button">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+{
+	"extends": ["eslint:recommended", "google"],
+	"env": {
+        "node": true,
+        "mocha": true,
+        "mongo": true,
+        "es6": true
+    },
+	"rules": {
+		"arrow-body-style": 0,
+		"arrow-parens": ["error", "as-needed", {
+			requireForBlockBody: true,
+		}],
+		"comma-dangle": [2, "never"],
+		"consistent-return": 0,
+		"eqeqeq": 2,					// to ensure we use the type-safe equality operators === and !==
+		"func-names": 0,
+		"indent": [2, 4],
+		"linebreak-style": ["error", "windows"],
+		"max-len": [1, 120, 4], 		// maximum length of 120 characters
+    	"no-alert": 0,					// disallow the use of alert, confirm, and prompt
+    	"no-comma-dangle": 0,			// disallow trailing commas in object literals
+    	"no-console": 0,
+    	"no-param-reassign": [2, {props: false}],
+    	"no-var": 0,
+		// Allow leading underscores for method names
+		// REASON: we use underscores to denote private methods and in MongoDB _id
+    	"no-underscore-dangle": 0,
+		"object-curly-spacing": ["error", "always"], // require padding inside curly braces
+    	"one-var": 0,
+    	"quotes": [2, "single", "avoid-escape"],
+   	    "quote-props": ["error", "as-needed", { keywords: false, unnecessary: true, numbers: false }],
+    	"require-jsdoc": "off",			// do not require jsdoc
+		"space-before-function-paren": ["error", {
+			anonymous: "always",
+			named: "never",
+			asyncArrow: "always"
+		}],
+		"space-in-parens": ["error", "never"], // require or disallow spaces inside parentheses
+    	"strict": 0,					// controls location of Use Strict Directives
+        "semi": [2, "always"],
+        "yoda": 0,						// require or disallow Yoda conditions
+	}
+}

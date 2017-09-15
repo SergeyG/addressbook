@@ -1,0 +1,15 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    "/.idea/*",
+    "/public/**/*"
+  ],
+  "verbose": true,
+  "env": {
+    "NODE_ENV": "development",
+    "MONGODB_URI": "mongodb://localhost:27017/"
+  },
+  "ext": "js json yaml"
+}
