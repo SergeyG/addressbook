@@ -18,7 +18,9 @@ $ npm install or yarn
 ## [config/configuration.js][config/configuration.js]
 Default port 3000. You can change it to any desired port.
 
-Start app at `http://localhost:3000/`:
+Html version at `http://localhost:3000/html`
+
+Angular version at `http://localhost:3000/angular`:
 
 ```bash
 $ npm start
