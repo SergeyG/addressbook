@@ -4,8 +4,7 @@
 const router = require('express').Router();
 const multer = require('multer');
 const upload = multer({ dest: 'public/files/' });
-const apiHandlers = require('../handlers/api');
-const publicHandlers = require('../handlers/public');
+const angularHandlers = require('../handlers/angular');
 
 module.exports = function (app) {
     'use strict';
@@ -14,10 +13,8 @@ module.exports = function (app) {
     // HOME PAGE (with login links) ========
     // =====================================
     // route middleware to make sure
-    router.get('/', publicHandlers.index)
-        .get('/page/:page', publicHandlers.index)
-        .post('/post-file', upload.single('csvFileInput'), publicHandlers.post)
-        .put('/api/update-address/:addressId', apiHandlers.updateAddress)
-        .delete('/api/delete-address/:addressId', apiHandlers.deleteAddress);
+    router.get('/', angularHandlers.index)
+        .get('/api/datatable.json', angularHandlers.get)
+        .post('/post-file', upload.single('csvFileInput'), angularHandlers.post);
     app.use('/angular', router);
 };

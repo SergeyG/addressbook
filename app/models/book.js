@@ -25,10 +25,19 @@ class BookService {
     /**
      * Get all address records
      * @method
+     * @param {String} search
      * @return {*|{document}|Promise}
      */
-    getAddress() {
-        return this.collection.find();
+    getAddress(search = null) {
+        const filter = {};
+        if (null !== search && '' !== search) {
+            filter.$or = [
+                { firstname: { $regex: search, $options: 'i' } },
+                { lastname: { $regex: search, $options: 'i' } },
+                { email: { $regex: search, $options: 'i' } }
+            ];
+        }
+        return this.collection.find(filter);
     }
 
     /**

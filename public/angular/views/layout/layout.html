@@ -1,0 +1,24 @@
+  <!-- aside -->
+  <div id="aside" class="app-aside modal fade nav-dropdown" ng-class="{'folded': app.setting.folded}">
+  	<!-- fluid app aside -->
+    <div class="left navside dark dk" data-layout="column">
+  	  <div class="navbar no-radius">
+        <div ui-include="'/angular/views/blocks/navbar.brand.html'"></div>
+      </div>
+      <div class="hide-scroll" data-flex>
+          <nav class="scroll nav-light">
+            <div ui-include="'/angular/views/blocks/nav.html'"></div>
+          </nav>
+      </div>
+    </div>
+  </div>
+  <!-- / -->
+  
+  <!-- content -->
+  <div id="content" class="app-content box-shadow-z0" role="main">
+    <div class="app-footer" ng-class="{'hide': $state.current.data.hideFooter}">
+      <div ui-include="'/angular/views/blocks/footer.html'"></div>
+    </div>
+    <div ui-view class="app-body" id="view"></div>
+  </div>
+  <!-- / -->
