@@ -1,5 +1,5 @@
 /**
- * Created by Sergey Ganziy on 13.09.2017.
+ * Created by Sergey Ganziy on 19.09.2017.
  */
 const router = require('express').Router();
 const multer = require('multer');
@@ -19,5 +19,5 @@ module.exports = function (app) {
         .post('/post-file', upload.single('csvFileInput'), publicHandlers.post)
         .put('/api/update-address/:addressId', apiHandlers.updateAddress)
         .delete('/api/delete-address/:addressId', apiHandlers.deleteAddress);
-    app.use('/html', router);
+    app.use('/angular', router);
 };

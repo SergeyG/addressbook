@@ -42,7 +42,7 @@ module.exports = {
                     page: i
                 });
             }
-            res.render('index', {
+            res.render('html/index', {
                 title: 'Address Book',
                 addressList: result,
                 currentpage: page,
@@ -50,15 +50,15 @@ module.exports = {
             });
         } catch (err) {
             console.error(err, err.stack);
-            res.render('error', {
+            res.render('html/error', {
                 title: 'Error occured',
                 message: err.message
             });
         }
     },
     post(req, res, next) {
-        if (null === req.file) {
-            return res.redirect('/');
+        if (!req.file) {
+            return res.redirect('/html');
         }
         const filePath = path.join(process.cwd(), req.file.path);
         const parser = csvParser({
@@ -85,13 +85,13 @@ module.exports = {
             batch.execute(function(err, result) {
                 if (err) {
                     console.error(err, err.stack);
-                    return res.render('error', {
+                    return res.render('html/error', {
                         title: 'Error occured',
                         message: err.message
                     });
                 }
                 console.log('finish', result.nInserted);
-                res.redirect('/');
+                res.redirect('/html');
             });
         });
         input.pipe(parser);

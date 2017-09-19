@@ -42,7 +42,7 @@ module.exports = function () {
             }
         },
         compileAll() {
-            compileTemplate('address_partial', 'views/partial/address.dust');
+            compileTemplate('address_partial', 'views/html/partial/address.dust');
         }
 
     };

@@ -13,6 +13,7 @@ const expressValidator = require('express-validator');
 const methodOverride = require('method-override');
 
 const frontend = require('./app/routes/index');
+const angular = require('./app/routes/angular');
 const templCompilers = require('./app/custom/templ_compilers');
 
 const db = require('./config/database').Database;
@@ -107,7 +108,8 @@ app.use((req, res, next) => {
     next();
 });
 
-frontend(app); /** load our routes and pass in our app and fully configured passport */
+frontend(app); /** load routes for html version */
+angular(app); /** load routes for angular version */
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

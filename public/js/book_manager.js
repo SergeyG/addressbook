@@ -55,7 +55,7 @@
                     email: form.txtEmail.value
                 };
                 $.ajax({
-                    url: '' === id ? '/api/add-address' : '/api/update-address/' + id,
+                    url: '' === id ? '/html/api/add-address' : '/html/api/update-address/' + id,
                     type: '' === id ? 'POST' : 'PUT',
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
@@ -119,7 +119,7 @@
         var $this = $(this);
         var removable = $this.parents('.grid');
         $.ajax({
-            url: '/api/delete-address/' + removable.data('id'),
+            url: '/html/api/delete-address/' + removable.data('id'),
             type: 'DELETE',
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',

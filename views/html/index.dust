@@ -1,4 +1,4 @@
-{>layout /}
+{>"html\layout" /}
 {<stylesheetContainer}
 <link href="/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
 <link href="/plugins/jquery-notifications/css/messenger.css" rel="stylesheet" type="text/css" />
@@ -20,7 +20,7 @@
                         <h4 class="semi-bold">Address Book Bulk Load</h4>
                     </div>
                     <div class="grid-body">
-                        <form id="new-address-form" name="formUpload" action="/post-file" method="POST" enctype="multipart/form-data" class="form-no-horizontal-spacing" novalidate="novalidate">
+                        <form id="new-address-form" name="formUpload" action="/html/post-file" method="POST" enctype="multipart/form-data" class="form-no-horizontal-spacing" novalidate="novalidate">
                             <div class="row column-seperation">
                                 <div class="col-md-6">
                                     <div class="row form-row">
@@ -103,7 +103,7 @@
                 <ul class="pagination clearfix">
                     {#addressPagination}
                         <li {@eq key="{currentpage}" value="{.page}"}class="active disabled"{/eq}>
-                            <a href="/page/{.page}" data-page="{.page}">{.page}</a>
+                            <a href="/html/page/{.page}" data-page="{.page}">{.page}</a>
                         </li>
                     {/addressPagination}
                 </ul>
