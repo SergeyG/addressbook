@@ -7,13 +7,13 @@
         </div>
         <div class="box-divider m-0"></div>
         <div class="box-body">
-          <form action="/angular/post-file" method="POST" enctype="multipart/form-data" role="form">
+          <form role="form" name="uploadForm">
             <div class="form-group">
-              <label for="csvFileInput">Select file</label>
-              <input id="csvFileInput" name="csvFileInput" class="form-control" type="file" name="..." accept=".csv" />
+              <label>Select file</label>
+              <input ui-file-upload="csvFileInput" class="form-control" type="file" name="..." accept=".csv" />
               <p class="help-block">NOTE - you can choose only CSV file. The first row is the header.</p>
             </div>
-            <button type="submit" class="btn white m-b">Submit</button>
+            <button type="submit" ng-click="upload()" class="btn white m-b">Submit</button>
           </form>
         </div>
       </div>

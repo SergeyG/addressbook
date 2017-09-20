@@ -15,6 +15,6 @@ module.exports = function (app) {
     // route middleware to make sure
     router.get('/', angularHandlers.index)
         .get('/api/datatable.json', angularHandlers.get)
-        .post('/post-file', upload.single('csvFileInput'), angularHandlers.post);
+        .post('/post-file', upload.single('file'), angularHandlers.post);
     app.use('/angular', router);
 };

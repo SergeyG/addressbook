@@ -66,7 +66,8 @@
   <script src="scripts/directives/ui-scroll-to.js"></script>
   <script src="scripts/directives/ui-toggle-class.js"></script>
   <script src="scripts/directives/ui-include.js"></script>
-  
+  <script src="scripts/directives/ui-file-upload.js"></script>
+
   <script src="scripts/filters/fromnow.js"></script>
 
   <script src="scripts/services/ngstore.js"></script>

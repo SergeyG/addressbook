@@ -1,63 +1,60 @@
-// code style: https://github.com/johnpapa/angular-styleguide 
-
-(function() {
+/* global angular:false */
+/* global FormData:false */
+(function () {
     'use strict';
+
     angular
         .module('app')
         .controller('UploadCtrl', UploadCtrl);
+    UploadCtrl.$inject = ['$scope', '$location', '$timeout', 'fileUpload', '$alert'];
 
-        UploadCtrl.$inject = ['$scope', 'FileUploader'];
-
-        function UploadCtrl($scope, FileUploader) {
-            var uploader = $scope.uploader = new FileUploader({
-                url: 'scripts/controllers/upload.php'
-            });
-
-            // FILTERS
-
-            uploader.filters.push({
-                name: 'customFilter',
-                fn: function(item /*{File|FileLikeObject}*/, options) {
-                    return this.queue.length < 10;
+    function UploadCtrl($scope, $location, $timeout, fileUpload, $alert) {
+        $scope.upload = function () {
+            var file = $scope.csvFileInput;
+            if (!file) {
+                var alert = $alert({
+                    title: 'Warning!',
+                    content: 'Please, choose the CSV file to upload.',
+                    placement: 'top-right',
+                    type: 'warning',
+                    duration: 3,
+                    keyboard: true,
+                    show: false
+                });
+                alert.$promise.then(alert.show);
+                return;
+            }
+            fileUpload.uploadFileToUrl(file, '/angular/post-file', function (err, response) {
+                var alert;
+                if (err) {
+                    alert = $alert({
+                        title: 'Error',
+                        content: err,
+                        placement: 'top-right',
+                        type: 'warning',
+                        duration: 3,
+                        keyboard: true,
+                        show: false
+                    });
+                } else {
+                    alert = $alert({
+                        title: response.title,
+                        content: response.message,
+                        placement: 'top-right',
+                        type: response.success ? 'info' : 'warning',
+                        duration: 3,
+                        keyboard: true,
+                        show: false
+                    });
                 }
+                alert.$promise.then(alert.show);
+                if (response && response.success) {
+                    $timeout(function () {
+                        $location.path('/dashboard');
+                    }, 3000);
+                }
+                return false;
             });
-
-            // CALLBACKS
-
-            uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-                console.info('onWhenAddingFileFailed', item, filter, options);
-            };
-            uploader.onAfterAddingFile = function(fileItem) {
-                console.info('onAfterAddingFile', fileItem);
-            };
-            uploader.onAfterAddingAll = function(addedFileItems) {
-                console.info('onAfterAddingAll', addedFileItems);
-            };
-            uploader.onBeforeUploadItem = function(item) {
-                console.info('onBeforeUploadItem', item);
-            };
-            uploader.onProgressItem = function(fileItem, progress) {
-                console.info('onProgressItem', fileItem, progress);
-            };
-            uploader.onProgressAll = function(progress) {
-                console.info('onProgressAll', progress);
-            };
-            uploader.onSuccessItem = function(fileItem, response, status, headers) {
-                console.info('onSuccessItem', fileItem, response, status, headers);
-            };
-            uploader.onErrorItem = function(fileItem, response, status, headers) {
-                console.info('onErrorItem', fileItem, response, status, headers);
-            };
-            uploader.onCancelItem = function(fileItem, response, status, headers) {
-                console.info('onCancelItem', fileItem, response, status, headers);
-            };
-            uploader.onCompleteItem = function(fileItem, response, status, headers) {
-                console.info('onCompleteItem', fileItem, response, status, headers);
-            };
-            uploader.onCompleteAll = function() {
-                console.info('onCompleteAll');
-            };
-
-            console.info('uploader', uploader);
-        }
+        };
+    }
 })();

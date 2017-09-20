@@ -37,7 +37,6 @@ module.exports = {
             result.forEach((item) => {
                 item.created_at = moment.utc(item.created_at).calendar();
             });
-            console.log(result);
             res.json({
                 data: result,
                 recordsFiltered: total,
@@ -52,7 +51,11 @@ module.exports = {
     },
     post(req, res, next) {
         if (!req.file) {
-            return res.redirect('/angular');
+            return res.json({
+                success: false,
+                title: 'Error occured',
+                message: 'Please, choose the CSV file to upload.'
+            });
         }
         const filePath = path.join(process.cwd(), req.file.path);
         const parser = csvParser({
@@ -79,13 +82,18 @@ module.exports = {
             batch.execute(function(err, result) {
                 if (err) {
                     console.error(err, err.stack);
-                    return res.render('html/error', {
+                    return res.json({
+                        success: false,
                         title: 'Error occured',
                         message: err.message
                     });
                 }
                 console.log('finish', result.nInserted);
-                res.redirect('/angular');
+                res.json({
+                    success: true,
+                    title: 'Success',
+                    message: 'Data was inserted successfully'
+                });
             });
         });
         input.pipe(parser);

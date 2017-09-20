@@ -97,7 +97,7 @@
           $anchorScroll();
           $location.hash('');
           // hide open menu
-          $('#aside').modal('hide');
+          //$('#aside').modal('hide');
           $('body').removeClass('modal-open').find('.modal-backdrop').remove();
           $('.navbar-toggleable-sm').collapse('hide');
         };
